@@ -1,0 +1,20 @@
+{%- macro render_value(value) -%}
+{%- if value is string or value is number -%}
+{{ value }}
+{%- elif value is sequence -%}
+{%- for item in value %}
+{{ '    ' + item|string }}
+{%- endfor -%}
+{%- else -%}
+{{ value }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro render_config(pillar_key, excluded_keys) -%}
+{%- set data = salt['pillar.get'](pillar_key) -%}
+{%- for key, value in data|dictsort -%}
+{%- if key not in excluded_keys -%}
+{{ key }}: {{ render_value(value) }} 
+{% endif -%}
+{%- endfor -%}
+{%- endmacro -%}

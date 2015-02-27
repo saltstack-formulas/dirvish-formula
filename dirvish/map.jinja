@@ -1,0 +1,6 @@
+{% set dirvish = salt['grains.filter_by']({
+    'Debian': {
+        'package': 'dirvish',
+        'master_config': '/etc/dirvish/master.conf',
+    },
+}, default='Debian', merge=salt['pillar.get']('dirvish:lookup')) %}

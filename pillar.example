@@ -1,0 +1,22 @@
+dirvish:
+  banks:  # defaults to ['/srv/dirvish']
+    - /srv/backup
+  vaults:  # Configuration of the vaults
+    local-etc:  # Vault name
+      default:  # Branch name
+        meta:   # Meta-configuration used by the formula, not by dirvish
+          enabled: False  # Defaults to True
+        # The rest is dirvish configuration to be put in <vault>/dirvish/default.conf
+        client: {{ grains['fqdn'] }}
+        tree: /etc
+  master.conf:
+    expire-default: +15 days
+    expire-rule:
+      #  MIN HR DOM MON DOW STRFTIME_FMT
+      - "*   *  *   *   1   +3 months"    # Keep weekly backup for 3 months
+      - "*   *  1-7 *   1   +1 year"      # Keep monthly backups for one year
+    image-time: '22:00'
+  lookup:
+    package: dirvish
+    master.conf: /etc/dirvish/master.conf
+
