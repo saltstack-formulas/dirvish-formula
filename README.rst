@@ -21,6 +21,11 @@ Available states
 
 Install dirvish and configures it according to the pillar data.
 
+Note: dirvish will use ssh (as root) to remote servers. It's up to you to
+ensure that the ssh connection works non-interactively. You might have
+to configure /root/.ssh/known_hosts and setup SSH keys on the remote
+servers.
+
 ``Configuration``
 =================
 See the pillar.example file to have an idea of everything that can
