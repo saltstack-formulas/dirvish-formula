@@ -7,7 +7,7 @@ dirvish:
         meta:   # Meta-configuration used by the formula, not by dirvish
           enabled: False  # Defaults to True
         # The rest is dirvish configuration to be put in <vault>/dirvish/default.conf
-        client: {{ grains['fqdn'] }}
+        client: {{ grains['host'] }}
         tree: /etc
   master.conf:
     expire-default: +15 days
