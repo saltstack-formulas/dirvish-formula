@@ -63,8 +63,7 @@ dirvish_vault_{{ vault }}_branch_{{ branch }}_config:
 dirvish_vault_{{ vault }}_branch_{{ branch }}_init:
   cmd.run:
     - name: dirvish --vault {{ vault }}:{{ branch }} --image init-{{ branch }} --init || rm -rf {{ vault_path }}/init-{{ branch }}
-    - user: root
-    - group: root
+    - runas: root
     - creates: {{ vault_path }}/dirvish/{{ branch }}.hist
     - require:
       - file: dirvish_vault_{{ vault }}_branch_{{ branch }}_config
